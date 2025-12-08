@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IoT IDS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="menu-item active" onclick="showPage('dashboard')">Dashboard</div>
+    <div class="menu-item" onclick="showPage('status')">Status</div>
+    <div class="menu-item" onclick="showPage('logs')">Logs</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <h1>IoT Intrusion Detection System</h1>
+
+    <!-- PAGE: DASHBOARD -->
+    <div class="page" id="page-dashboard">
+
+        <div class="device-grid" id="device-grid"></div>
+
+        <div class="card">
+            <h2>Attack Trend</h2>
+            <canvas id="attackChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Summary</h2>
+            <table>
+                <thead>
+                    <tr><th>Status</th><th>Count</th></tr>
+                </thead>
+                <tbody id="summary-body"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- PAGE: STATUS -->
+    <div class="page" id="page-status" style="display:none;">
+        <div class="card">
+            <h2>Device Status</h2>
+            <div class="device-grid" id="status-grid"></div>
+        </div>
+    </div>
+
+    <!-- PAGE: LOGS -->
+    <div class="page" id="page-logs" style="display:none;">
+        <div class="card">
+            <h2>Logs</h2>
+            <table>
+                <thead>
+                    <tr><th>Time</th><th>Device</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody id="logs-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- ATTACK POPUP -->
+<div id="alert-popup" class="alert-popup"></div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

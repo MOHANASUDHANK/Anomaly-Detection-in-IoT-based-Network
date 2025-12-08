@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    background: #0d0f13;
+    color: #e5e7eb;
+    font-family: Inter, Arial, sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    background: #111417;
+    padding-top: 30px;
+    z-index: 9999;   /* CRITICAL FIX */
+}
+
+.menu-item {
+    padding: 18px 25px;
+    cursor: pointer;
+    color: #9ca3af;
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background: #1b1f25;
+    color: white;
+}
+
+/* MAIN */
+.main {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+.card {
+    background: #13161b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+/* DEVICE GRID */
+.device-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.device-tile {
+    background: #1b1f25;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.device-name { font-size: 17px; }
+
+.device-status-ok {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.device-status-alert {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #1b1f25;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #2a2f36;
+}
+
+.status-blocked { color: #ef4444; font-weight: bold; }
+.status-logged { color: #22c55e; font-weight: bold; }
+
+/* POPUP */
+.alert-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ef4444;
+    padding: 15px 25px;
+    border-radius: 10px;
+    display: none;
+}
