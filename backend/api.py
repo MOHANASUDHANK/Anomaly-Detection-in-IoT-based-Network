@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 import os
+import time
 
 # ------------------------------
 # Load model & preprocessors
@@ -14,6 +15,22 @@ encoders = joblib.load(os.path.join(MODEL_DIR, "label_encoders.pkl"))
 scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
 
 app = FastAPI(title="IoT Intrusion Detection API")
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ------------------------------
+# In-Memory Log Storage (for Dashboard)
+# ------------------------------
+EVENT_LOG = []   # Stores device_type, timestamp, status
 
 # ------------------------------
 # 21 Features Expected
@@ -57,8 +74,29 @@ def predict_flow(data: FlowInput):
 
     # Model prediction
     pred = model.predict(df_scaled)[0]
+    status = "NORMAL" if pred == 0 else "ATTACK DETECTED"
+
+    # ------------------------------
+    # SAVE EVENT FOR DASHBOARD
+    # ------------------------------
+    EVENT_LOG.append({
+        "timestamp": data.timestamp,
+        "device_type": data.device_type,
+        "status": status
+    })
+
+    # keep memory small
+    if len(EVENT_LOG) > 500:
+        EVENT_LOG.pop(0)
 
     return {
         "prediction": int(pred),
-        "status": "NORMAL" if pred == 0 else "ATTACK DETECTED"
+        "status": status
     }
+
+# ------------------------------
+# Dashboard Events Route
+# ------------------------------
+@app.get("/events")
+def get_events():
+    return EVENT_LOG
