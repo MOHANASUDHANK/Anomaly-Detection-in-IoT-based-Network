@@ -2,7 +2,7 @@
 import socket
 import json
 import time
-from IOT_devices.shared_features import generate_features
+from shared_features import generate_features
 
 GATEWAY_IP = "192.168.118.23"
 GATEWAY_PORT = 5000

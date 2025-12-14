@@ -17,7 +17,7 @@ BPF_FILTER = "port 5000"
 # Windows  : "Wi-Fi"
 # Linux    : "wlan0"
 # Mac      : "en0"
-DEFAULT_INTERFACE = "Wi-Fi"
+DEFAULT_INTERFACE = "wifi"
 
 # -----------------------------------------------------------
 def start_capture(interface=DEFAULT_INTERFACE):
